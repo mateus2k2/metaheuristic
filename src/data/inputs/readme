@@ -1,0 +1,8 @@
+We are presenting 140 test instances for the single machine with periodical resource constraints. 
+In the smXX.txt files, we present the following parameters:
+1) The number of jobs.
+2) An upper bound for the number of periods.
+3) The time duration per period.
+4) The resource constraint per period.
+5) The processing times vector.
+6) The resource consumption vector.
