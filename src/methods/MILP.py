@@ -1,89 +1,69 @@
-import cplex
-from cplex.exceptions import CplexError
-
-def set_constraints_and_objective(cpx, I, J, p, r, T, R, M):
-    # Variable declarations
-    var_names = [f'X_{i}_{j}' for i in I for j in J] + [f'y_{i}' for i in I] + [f'w_{i}' for i in I] + ['z']
-    var_types = [cpx.variables.type.binary] * (len(I) * len(J) + len(I) * 2) + [cpx.variables.type.continuous]
-    cpx.variables.add(names=var_names, types=var_types, lb=[0] * len(var_names))
-    
-    # Objective function
-    objective = [T if 'y' in name else 0 for name in var_names[:-1]] + [-1]
-    cpx.objective.set_sense(cpx.objective.sense.minimize)
-    cpx.objective.set_linear(list(zip(var_names, objective)))
-    
-    # Constraints
-    rows = []
-    senses = []
-    rhs = []
-    
-    # designicaoTarefas
-    for j in J:
-        row = [[f'X_{i}_{j}' for i in I], [1] * len(I)]
-        rows.append(row)
-        senses.append('E')
-        rhs.append(1)
-    
-    # limiteDeTempo
-    for i in I:
-        row = [[f'X_{i}_{j}' for j in J], [p[j] for j in J]]
-        rows.append(row)
-        senses.append('L')
-        rhs.append(T)
-    
-    # limiteDeRecurso
-    for i in I:
-        row = [[f'X_{i}_{j}' for j in J], [r[j] for j in J]]
-        rows.append(row)
-        senses.append('L')
-        rhs.append(R)
-    
-    # limitaTarefasParaPeriodoUsados
-    for i in I:
-        for j in J:
-            row = [[f'X_{i}_{j}', f'y_{i}'], [1, -1]]
-            rows.append(row)
-            senses.append('L')
-            rhs.append(0)
-    
-    # apenasUmPeriodoComMaiorTempoOcioso
-    row = [[f'w_{i}' for i in I], [1] * len(I)]
-    rows.append(row)
-    senses.append('E')
-    rhs.append(1)
-    
-    # limitaPeriodoComMaiorTempoOciosoParaPeriodosUsados
-    for i in I:
-        row = [[f'w_{i}', f'y_{i}'], [1, -1]]
-        rows.append(row)
-        senses.append('L')
-        rhs.append(0)
-    
-    # calculaMaiorTempoOcioso
-    for i in I:
-        row = [[f'z', f'w_{i}', f'y_{i}'] + [f'X_{i}_{j}' for j in J], [1, -M, T] + [-p[j] for j in J]]
-        rows.append(row)
-        senses.append('L')
-        rhs.append(0)
-    
-    # Adding constraints to the model
-    cpx.linear_constraints.add(lin_expr=rows, senses=senses, rhs=rhs)
+from docplex.mp.model import Model
 
 def solve_model(I, J, p, r, T, R, M):
-    cpx = cplex.Cplex()
+    mdl = Model(name='Scheduling')
+
+    # Decision variables
+    X = mdl.binary_var_matrix(I, J, name='X')  # 1 if task j is processed in period i
+    y = mdl.binary_var_dict(I, name='y')  # 1 if period i is used
+    w = mdl.binary_var_dict(I, name='w')  # 1 if period i has the maximum idle time
+    z = mdl.continuous_var(name='z', lb=0)  # Computes the slack time of the period with the maximum
+
+    # Objective function
+    mdl.minimize(T * mdl.sum(y[i] for i in I) - z)
+
+    # Constraints
+    mdl.add_constraints(mdl.sum(X[i, j] for i in I) == 1 for j in J)  # Each task is assigned to one period
+    mdl.add_constraints(mdl.sum(p[j] * X[i, j] for j in J) <= T for i in I)  # Processing time limit per period
+    mdl.add_constraints(mdl.sum(r[j] * X[i, j] for j in J) <= R for i in I)  # Resource limit per period
+    mdl.add_constraints(X[i, j] <= y[i] for i in I for j in J)  # Tasks assigned only to used periods
+    mdl.add_constraint(mdl.sum(w[i] for i in I) == 1)  # Only one period has the maximum idle time
+    mdl.add_constraints(w[i] <= y[i] for i in I)  # Maximum idle time period must be a used period
+    mdl.add_constraints(z <= (M * (1 - w[i])) + (T * y[i]) - mdl.sum(p[j] * X[i, j] for j in J) for i in I)  # Calculate maximum idle time
+
+    solution = mdl.solve()
     
-    try:
-        set_constraints_and_objective(cpx, I, J, p, r, T, R, M)
-        cpx.solve()
-    except CplexError as exc:
-        print(exc)
-        return
+    return solution
+
+def convertSolution(solutionCPLX):
+    # Extract the solution values and variable names
+    solution_values = []
+    var_names = []
     
-    # Results
-    solution_values = cpx.solution.get_values()
-    var_names = cpx.variables.get_names()
+    for var in solutionCPLX.iter_variables():
+        solution_values.append(var.solution_value)
+        var_names.append(var.name)
+
+    # Create a dictionary to store the jobs assigned to each period
+    periods = {}
+
+    # Iterate through the solution values and variable names
     for name, value in zip(var_names, solution_values):
-        print(f"{name} = {value}")
+        if name.startswith('X_') and value > 0.5:  # Only consider assignments with value 1
+            # Extract job and period indices from the variable name
+            _, j, i = name.split('_')
+            i, j = int(i), int(j)
+            i = i - 1
+            j = j - 1
+            
+            # Initialize the period list if it doesn't exist
+            if j not in periods:
+                periods[j] = []
+            
+            # Assign the job to the period
+            periods[j].append(i)
+
+    # convert the periods dictionary to a list of periods
+    sorted_periods = [periods[j] for j in sorted(periods.keys())]
+
+    # iterate over the w variables to find the period with the most idle time
+    # put the max_idle_period at the end of the sorted_periods
+    w_values = [value for name, value in zip(var_names, solution_values) if name.startswith('w_')]
+    max_idle_period = w_values.index(1)
+    sorted_periods.append(sorted_periods.pop(max_idle_period))
+
+    # return the flattened list of periods
+    return [job for period in sorted_periods for job in period]
 
 def runMILP(instance):
     J = list(range(1, instance['numJobs'] + 1))  # number of jobs
@@ -96,4 +76,9 @@ def runMILP(instance):
     R = instance['resourceConstraint']  # resourceConstraint
     M = 1000000
 
-    solve_model(I, J, p, r, T, R, M)
+    solutionCPLX = solve_model(I, J, p, r, T, R, M)
+    solution = convertSolution(solutionCPLX)
+    print("Solution:", solution)
+
+    return solution
+    
