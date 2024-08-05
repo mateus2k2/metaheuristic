@@ -1,5 +1,6 @@
 import json
 import statistics
+import time
 
 import load as load
 import checker as checker
@@ -23,12 +24,14 @@ for item in batch["queeu"]:
             data = load.load(file)
             value, solution = 0, []
 
+            start_time = time.perf_counter()
             if item["method"] == "localSearch":
                 value, solution = local_search.local_search(data, item["parans"]["maxIterations"])
             elif item["method"] == "MILP":
                 value, solution = MILP.runMILP(data)
+            end_time = time.perf_counter()
 
-            results.append({"value": value, "solution": solution})
+            results.append({"value": value, "solution": solution, "time": end_time - start_time})
         
         # Extract the best result solution
         best_result = min(results, key=lambda x: x["value"])
@@ -39,30 +42,22 @@ for item in batch["queeu"]:
         values = [result["value"] for result in results]
         mean_value = statistics.mean(values)
 
+        # Calculate the mean of the result times
+        times = [result["time"] for result in results]
+        mean_time = statistics.mean(times)
+
+        print(f"Mean time: {mean_time}")
         print(f"Best value: {best_value}")
         print(f"Mean value: {mean_value}")
         print(f"Best solution: {best_solution}")
         checker.main(data, best_solution, graph=False, prints=True)
         print("\n\n")
 
+# data = load.load("./data/inputs/sm1.txt")
+# value, solution = local_search.local_search(data, 1000)
+# print(value)
+# value, solution = MILP.runMILP(data)
+# print(value)
 
-exit()
-
-# ---------------------------------------------------------------------------
-
-for key, value in batch["fileClasses"].items():
-    print(key)
-    data = load.load(value[0])
-    value, solution = MILP.runMILP(data)
-    checker.main(data, solution)
-
-# ---------------------------------------------------------------------------
-
-data = load.load("./data/inputs/sm1.txt")
-value, solution = local_search.local_search(data, 1000)
-print(value)
-value, solution = MILP.runMILP(data)
-print(value)
-
-checker.main(data=data, solution=solution, graph=True, prints=False)
+# checker.main(data=data, solution=solution, graph=True, prints=False)
 
