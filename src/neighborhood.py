@@ -1,4 +1,4 @@
-def neighborhood(solution):
+def simple(solution):
     nbrhood = []
     
     for i in range(0, len(solution)):

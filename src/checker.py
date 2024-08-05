@@ -4,9 +4,6 @@ import evaluate as evaluate
 # export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
 
 def checkSolution(data, periods):
-    print("Num Periods: ", data['numPeriods'])
-    print("Periods Used: ", len(periods))
-
     if len(periods) > data['numPeriods']:
         return False
     
@@ -85,11 +82,18 @@ def plotGraph(data, periods):
     ax.set_ylim(-0.5, 4.5)
     plt.show()
 
-def main(data, solution):
-    print("Recurso por periodo: ", data['resourceConstraint'])
-    print("Tempo por periodo: ", data['timeDuration'])
-    print("Evaluation: ", evaluate.evaluate(data, solution))
+def main(data, solution, graph=False, prints=False):
 
     periods = createPeriods(data, solution)
-    checkSolution(data, periods)
-    plotGraph(data, periods)
+    result = checkSolution(data, periods)
+    
+    if prints:
+        print("Recurso por periodo: ", data['resourceConstraint'])
+        print("Tempo por periodo: ", data['timeDuration'])
+        print("Evaluation: ", evaluate.evaluate(data, solution))
+        print("Solution: ", solution)
+        print("Check", result)
+        print("Num Periods: ", data['numPeriods'])
+        print("Periods Used: ", len(periods))
+
+    if graph: plotGraph(data, periods)

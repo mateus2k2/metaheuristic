@@ -12,7 +12,7 @@ def local_search(data, maxIter):
     iter = 0
     while iter < maxIter:
         iter += 1
-        neighborhoodSolutions = neighborhood.neighborhood(currentSolution)
+        neighborhoodSolutions = neighborhood.simple(currentSolution)
         
         for solution in neighborhoodSolutions:
             cost = evaluate.evaluate(data, solution)
@@ -26,4 +26,4 @@ def local_search(data, maxIter):
         else:
             break
     
-    return bestSolution
+    return evaluate.evaluate(data, currentSolution), bestSolution

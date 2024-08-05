@@ -5,7 +5,8 @@ def solve_model(I, J, p, r, T, R, M):
 
     # Decision variables
     X = mdl.binary_var_matrix(I, J, name='X')  # 1 if task j is processed in period i
-    y = mdl.binary_var_dict(I, name='y')  # 1 if period i is used
+    # y = mdl.binary_var_dict(I, name='y')  # 1 if period i is used
+    y = mdl.continuous_var_dict(I, name='y', lb=0)  # 1 if period i is used
     w = mdl.binary_var_dict(I, name='w')  # 1 if period i has the maximum idle time
     z = mdl.continuous_var(name='z', lb=0)  # Computes the slack time of the period with the maximum
 
@@ -22,7 +23,7 @@ def solve_model(I, J, p, r, T, R, M):
     mdl.add_constraints(z <= (M * (1 - w[i])) + (T * y[i]) - mdl.sum(p[j] * X[i, j] for j in J) for i in I)  # Calculate maximum idle time
 
     solution = mdl.solve()
-    
+
     return solution
 
 def convertSolution(solutionCPLX):
@@ -77,8 +78,9 @@ def runMILP(instance):
     M = 1000000
 
     solutionCPLX = solve_model(I, J, p, r, T, R, M)
-    solution = convertSolution(solutionCPLX)
-    print("Solution:", solution)
+    if solutionCPLX: 
+        solution = convertSolution(solutionCPLX)
+        return solutionCPLX.objective_value, solution
 
-    return solution
-    
+    return -1, []
+

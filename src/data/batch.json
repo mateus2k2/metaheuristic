@@ -1,0 +1,272 @@
+{
+    "queeu": [
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "10"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "20"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "30"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "40"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "50"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "60"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "70"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "80"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "90"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "100"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "110"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "120"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "130"
+        },
+        {
+            "method": "MILP",
+            "parans": {},
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "140"
+        }
+    ],
+    "fileClasses": {
+        "10": [
+            "data/inputs/sm1.txt",
+            "data/inputs/sm2.txt",
+            "data/inputs/sm3.txt",
+            "data/inputs/sm4.txt",
+            "data/inputs/sm5.txt",
+            "data/inputs/sm6.txt",
+            "data/inputs/sm7.txt",
+            "data/inputs/sm8.txt",
+            "data/inputs/sm9.txt",
+            "data/inputs/sm10.txt"
+        ],
+        "20": [
+            "data/inputs/sm11.txt",
+            "data/inputs/sm12.txt",
+            "data/inputs/sm13.txt",
+            "data/inputs/sm14.txt",
+            "data/inputs/sm15.txt",
+            "data/inputs/sm16.txt",
+            "data/inputs/sm17.txt",
+            "data/inputs/sm18.txt",
+            "data/inputs/sm19.txt",
+            "data/inputs/sm20.txt"
+        ],
+        "30": [
+            "data/inputs/sm21.txt",
+            "data/inputs/sm22.txt",
+            "data/inputs/sm23.txt",
+            "data/inputs/sm24.txt",
+            "data/inputs/sm25.txt",
+            "data/inputs/sm26.txt",
+            "data/inputs/sm27.txt",
+            "data/inputs/sm28.txt",
+            "data/inputs/sm29.txt",
+            "data/inputs/sm30.txt"
+        ],
+        "40": [
+            "data/inputs/sm31.txt",
+            "data/inputs/sm32.txt",
+            "data/inputs/sm33.txt",
+            "data/inputs/sm34.txt",
+            "data/inputs/sm35.txt",
+            "data/inputs/sm36.txt",
+            "data/inputs/sm37.txt",
+            "data/inputs/sm38.txt",
+            "data/inputs/sm39.txt",
+            "data/inputs/sm40.txt"
+        ],
+        "50": [
+            "data/inputs/sm41.txt",
+            "data/inputs/sm42.txt",
+            "data/inputs/sm43.txt",
+            "data/inputs/sm44.txt",
+            "data/inputs/sm45.txt",
+            "data/inputs/sm46.txt",
+            "data/inputs/sm47.txt",
+            "data/inputs/sm48.txt",
+            "data/inputs/sm49.txt",
+            "data/inputs/sm50.txt"
+        ],
+        "60": [
+            "data/inputs/sm51.txt",
+            "data/inputs/sm52.txt",
+            "data/inputs/sm53.txt",
+            "data/inputs/sm54.txt",
+            "data/inputs/sm55.txt",
+            "data/inputs/sm56.txt",
+            "data/inputs/sm57.txt",
+            "data/inputs/sm58.txt",
+            "data/inputs/sm59.txt",
+            "data/inputs/sm60.txt"
+        ],
+        "70": [
+            "data/inputs/sm61.txt",
+            "data/inputs/sm62.txt",
+            "data/inputs/sm63.txt",
+            "data/inputs/sm64.txt",
+            "data/inputs/sm65.txt",
+            "data/inputs/sm66.txt",
+            "data/inputs/sm67.txt",
+            "data/inputs/sm68.txt",
+            "data/inputs/sm69.txt",
+            "data/inputs/sm70.txt"
+        ],
+        "80": [
+            "data/inputs/sm71.txt",
+            "data/inputs/sm72.txt",
+            "data/inputs/sm73.txt",
+            "data/inputs/sm74.txt",
+            "data/inputs/sm75.txt",
+            "data/inputs/sm76.txt",
+            "data/inputs/sm77.txt",
+            "data/inputs/sm78.txt",
+            "data/inputs/sm79.txt",
+            "data/inputs/sm80.txt"
+        ],
+        "90": [
+            "data/inputs/sm81.txt",
+            "data/inputs/sm82.txt",
+            "data/inputs/sm83.txt",
+            "data/inputs/sm84.txt",
+            "data/inputs/sm85.txt",
+            "data/inputs/sm86.txt",
+            "data/inputs/sm87.txt",
+            "data/inputs/sm88.txt",
+            "data/inputs/sm89.txt",
+            "data/inputs/sm90.txt"
+        ],
+        "100": [
+            "data/inputs/sm91.txt",
+            "data/inputs/sm92.txt",
+            "data/inputs/sm93.txt",
+            "data/inputs/sm94.txt",
+            "data/inputs/sm95.txt",
+            "data/inputs/sm96.txt",
+            "data/inputs/sm97.txt",
+            "data/inputs/sm98.txt",
+            "data/inputs/sm99.txt",
+            "data/inputs/sm100.txt"
+        ],
+        "110": [
+            "data/inputs/sm101.txt",
+            "data/inputs/sm102.txt",
+            "data/inputs/sm103.txt",
+            "data/inputs/sm104.txt",
+            "data/inputs/sm105.txt",
+            "data/inputs/sm106.txt",
+            "data/inputs/sm107.txt",
+            "data/inputs/sm108.txt",
+            "data/inputs/sm109.txt",
+            "data/inputs/sm110.txt"
+        ],
+        "120": [
+            "data/inputs/sm111.txt",
+            "data/inputs/sm112.txt",
+            "data/inputs/sm113.txt",
+            "data/inputs/sm114.txt",
+            "data/inputs/sm115.txt",
+            "data/inputs/sm116.txt",
+            "data/inputs/sm117.txt",
+            "data/inputs/sm118.txt",
+            "data/inputs/sm119.txt",
+            "data/inputs/sm120.txt"
+        ],
+        "130": [
+            "data/inputs/sm121.txt",
+            "data/inputs/sm122.txt",
+            "data/inputs/sm123.txt",
+            "data/inputs/sm124.txt",
+            "data/inputs/sm125.txt",
+            "data/inputs/sm126.txt",
+            "data/inputs/sm127.txt",
+            "data/inputs/sm128.txt",
+            "data/inputs/sm129.txt",
+            "data/inputs/sm130.txt"
+        ],
+        "140": [
+            "data/inputs/sm131.txt",
+            "data/inputs/sm132.txt",
+            "data/inputs/sm133.txt",
+            "data/inputs/sm134.txt",
+            "data/inputs/sm135.txt",
+            "data/inputs/sm136.txt",
+            "data/inputs/sm137.txt",
+            "data/inputs/sm138.txt",
+            "data/inputs/sm139.txt",
+            "data/inputs/sm140.txt"
+        ]
+    }
+}
