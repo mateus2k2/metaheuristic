@@ -5,7 +5,6 @@ def solve_model(I, J, p, r, T, R, M):
 
     # Decision variables
     X = mdl.binary_var_matrix(I, J, name='X')  # 1 if task j is processed in period i
-    # y = mdl.binary_var_dict(I, name='y')  # 1 if period i is used
     y = mdl.continuous_var_dict(I, name='y', lb=0)  # 1 if period i is used
     w = mdl.binary_var_dict(I, name='w')  # 1 if period i has the maximum idle time
     z = mdl.continuous_var(name='z', lb=0)  # Computes the slack time of the period with the maximum
