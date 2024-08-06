@@ -50,7 +50,7 @@ for item in batch["queeu"]:
         times = [result["time"] for result in results]
         mean_time = statistics.mean(times)
 
-        rpd = ((mean_value - lower_bound)/lower_bound) * 100
+        rpd = ((mean_value - (lower_bound))/(lower_bound)) * 100
 
         print(f"Lower bound: {lower_bound}")
         print(f"RPD: {rpd}")

@@ -57,12 +57,9 @@ def convertSolution(solutionCPLX):
     sorted_periods = [periods[j] for j in sorted(periods.keys())]
 
     # iterate over the w variables to find the period with the most idle time
-    # put the max_idle_period at the end of the sorted_periods
-    w_values = [value for name, value in zip(var_names, solution_values) if name.startswith('w_')]
-    max_idle_period = w_values.index(1)
-    sorted_periods.append(sorted_periods.pop(max_idle_period))
+    w_values = [int(name.split('_')[1]) - 1 for name, value in zip(var_names, solution_values) if name.startswith('w_') and value > 0.5][0]
+    sorted_periods.append(sorted_periods.pop(w_values))
 
-    # return the flattened list of periods
     return [job for period in sorted_periods for job in period]
 
 def runMILP(instance):

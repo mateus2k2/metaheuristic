@@ -1,0 +1,2 @@
+Olá, sou aluno de ciência da computação na Universidade Federal de Ouro Preto. Estou cursando a disciplina de meta-heurísticas, onde o trabalho prático consiste em implementar novos métodos para problema na literatura, eu escolhi um artigo de sua autoria e gostaria de esclarecer algumas dúvidas, se possível. 
+

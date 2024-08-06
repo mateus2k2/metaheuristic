@@ -6,6 +6,15 @@
             "numOfTimesToRun": 1,
             "maxFilesToRunPerClass": 1,
             "fileSizeClass": "10"
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "maxIterations": 1000
+            },
+            "numOfTimesToRun": 1,
+            "maxFilesToRunPerClass": 1,
+            "fileSizeClass": "10"
         }
     ],
     "fileClasses": {
