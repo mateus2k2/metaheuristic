@@ -26,4 +26,4 @@ def local_search(data, maxIter):
         else:
             break
     
-    return evaluate.evaluate(data, currentSolution), bestSolution
+    return 0, evaluate.evaluate(data, currentSolution), bestSolution

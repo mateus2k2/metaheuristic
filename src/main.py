@@ -1,6 +1,7 @@
 import json
 import statistics
 import time
+import math
 
 import load as load
 import checker as checker
@@ -16,23 +17,26 @@ batch = json.load(batch)
 for item in batch["queeu"]:
     for i in range(0, item["maxFilesToRunPerClass"]):
         file = batch["fileClasses"][item["fileSizeClass"]][i]
+        data = load.load(file)
         results = []    
 
         print(f"File: {file} | Method: {item['method']}")
 
         for i in range(0, item["numOfTimesToRun"]):
-            data = load.load(file)
-            value, solution = 0, []
+            runTime, value, solution = 0, 0, []
 
             start_time = time.perf_counter()
             if item["method"] == "localSearch":
-                value, solution = local_search.local_search(data, item["parans"]["maxIterations"])
+                runTime, value, solution = local_search.local_search(data, item["parans"]["maxIterations"])
             elif item["method"] == "MILP":
-                value, solution = MILP.runMILP(data)
+                runTime, value, solution = MILP.runMILP(data)
             end_time = time.perf_counter()
 
             results.append({"value": value, "solution": solution, "time": end_time - start_time})
         
+        # sum of processing times of data
+        lower_bound = math.ceil(max(sum(data["processingTimes"]) / data["timeDuration"], sum(data["resourceConsumption"]) / data["resourceConstraint"]))
+
         # Extract the best result solution
         best_result = min(results, key=lambda x: x["value"])
         best_value = best_result["value"]
@@ -46,11 +50,15 @@ for item in batch["queeu"]:
         times = [result["time"] for result in results]
         mean_time = statistics.mean(times)
 
+        rpd = ((mean_value - lower_bound)/lower_bound) * 100
+
+        print(f"Lower bound: {lower_bound}")
+        print(f"RPD: {rpd}")
         print(f"Mean time: {mean_time}")
         print(f"Best value: {best_value}")
         print(f"Mean value: {mean_value}")
         print(f"Best solution: {best_solution}")
-        checker.main(data, best_solution, graph=False, prints=True)
+        checker.main(data, best_solution, graph=True, prints=True)
         print("\n\n")
 
 # data = load.load("./data/inputs/sm1.txt")

@@ -79,7 +79,7 @@ def runMILP(instance):
     solutionCPLX = solve_model(I, J, p, r, T, R, M)
     if solutionCPLX: 
         solution = convertSolution(solutionCPLX)
-        return solutionCPLX.objective_value, solution
+        return 0, solutionCPLX.objective_value, solution
 
-    return -1, []
+    return 0, -1, []
 
