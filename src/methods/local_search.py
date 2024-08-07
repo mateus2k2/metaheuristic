@@ -12,7 +12,7 @@ def local_search(data, maxIter):
     iter = 0
     while iter < maxIter:
         iter += 1
-        neighborhoodSolutions = neighborhood.simple(currentSolution)
+        neighborhoodSolutions = neighborhood.randonInsert(currentSolution)
         
         for solution in neighborhoodSolutions:
             cost = evaluate.evaluate(data, solution)

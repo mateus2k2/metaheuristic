@@ -3,8 +3,8 @@
         {
             "method": "MILP",
             "parans": {},
-            "numOfTimesToRun": 1,
-            "maxFilesToRunPerClass": 1,
+            "numOfTimesToRun": 2,
+            "maxFilesToRunPerClass": 2,
             "fileSizeClass": "10"
         },
         {
@@ -12,8 +12,8 @@
             "parans": {
                 "maxIterations": 1000
             },
-            "numOfTimesToRun": 1,
-            "maxFilesToRunPerClass": 1,
+            "numOfTimesToRun": 2,
+            "maxFilesToRunPerClass": 2,
             "fileSizeClass": "10"
         }
     ],
