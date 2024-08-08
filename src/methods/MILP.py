@@ -21,6 +21,13 @@ def solve_model(I, J, p, r, T, R, M):
     mdl.add_constraints(w[i] <= y[i] for i in I)  # Maximum idle time period must be a used period
     mdl.add_constraints(z <= (M * (1 - w[i])) + (T * y[i]) - mdl.sum(p[j] * X[i, j] for j in J) for i in I)  # Calculate maximum idle time
 
+    mdl.parameters.timelimit = 1800  # Time limit
+    mdl.parameters.mip.tolerances.mipgap = 0.01  # Relative MIP gap
+    mdl.parameters.threads = 4  # Number of threads
+    mdl.parameters.parallel = 1  # Parallel mode
+    mdl.parameters.randomseed = 42  # Random seed
+    # mdl.parameters.workmem = 1024  # Limit to 1GB of RAM
+
     solution = mdl.solve()
 
     return solution

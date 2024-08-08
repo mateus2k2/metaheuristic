@@ -6,9 +6,7 @@ import math
 import load as load
 import checker as checker
 
-import methods.local_search as local_search
 import methods.MILP as MILP
-import methods.SA as SA
 import methods.construtivas as construtivas
 
 # make run >> ./src/data/logs/exec.log
@@ -31,12 +29,12 @@ for item in batch["queeu"]:
             runTime, value, solution = 0, 0, []
 
             start_time = time.perf_counter()
-            if item["method"] == "localSearch":
-                runTime, value, solution = local_search.local_search(data, item["parans"]["maxIterations"])
-            elif item["method"] == "MILP":
+            if item["method"] == "MILP":
                 runTime, value, solution = MILP.runMILP(data)
+            elif item["method"] == "constructive":
+                runTime, value, solution = construtivas.main(data, item["parans"]["phase1"], item["parans"]["phase2"], item["parans"]["phase3"])
             end_time = time.perf_counter()
-
+            
             fileResults.append({"value": value, "solution": solution, "time": end_time - start_time})
         
 
@@ -72,10 +70,7 @@ for item in batch["queeu"]:
 
         itemResult[file] = {"fileResults": fileResults, "meanValue": mean_value, "meanTime": mean_time, "bestValue": best_value, "bestSolution": best_solution, "rpd": rpd, "lowerBound": lower_bound}
 
-
     results.append({"itemResult": itemResult, "item": item})    
-
-print(results)
 
 # data = load.load("./data/inputs/sm70.txt")
 

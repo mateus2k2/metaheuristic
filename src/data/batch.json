@@ -8,9 +8,11 @@
             "fileSizeClass": "10"
         },
         {
-            "method": "localSearch",
+            "method": "constructive",
             "parans": {
-                "maxIterations": 1000
+                "phase1": "sum",
+                "phase2": "LPD",
+                "phase3": "first_fit"
             },
             "numOfTimesToRun": 2,
             "maxFilesToRunPerClass": 2,
