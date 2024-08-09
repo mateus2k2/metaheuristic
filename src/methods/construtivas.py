@@ -65,14 +65,13 @@ def ASharp(jobs):
 # PHASE 3
 # ------------------------------------------------------------------------------------------------
 
-def first_fit(data):
+def first_fit(data, jobs):
     numJobs = data['numJobs']
     numPeriods = data['numPeriods']
     timeDuration = data['timeDuration']
     resourceConstraint = data['resourceConstraint']
     processingTimes = data['processingTimes']
     resourceConsumption = data['resourceConsumption']
-    jobs = list(range(numJobs))
     
     periods = [[] for _ in range(numPeriods)]
     period_time = [0] * numPeriods
@@ -94,14 +93,13 @@ def first_fit(data):
     flatPeriods = [job for period in periods for job in period]
     return 0, evaluate.evaluate(data, flatPeriods), flatPeriods
 
-def best_fit(data):
+def best_fit(data, jobs):
     numJobs = data['numJobs']
     numPeriods = data['numPeriods']
     timeDuration = data['timeDuration']
     resourceConstraint = data['resourceConstraint']
     processingTimes = data['processingTimes']
     resourceConsumption = data['resourceConsumption']
-    jobs = list(range(numJobs))
     
     periods = [[] for _ in range(numPeriods)]
     period_time = [0] * numPeriods
@@ -148,9 +146,9 @@ def main(data, phase1, phase2, phase3):
         jobs = ASharp(jobs)
     
     if phase3 == "first_fit":
-        return first_fit(data)
+        return first_fit(data, jobs)
     elif phase3 == "best_fit":
-        return best_fit(data)
+        return best_fit(data, jobs)
     
     return 0, 0, []
 
