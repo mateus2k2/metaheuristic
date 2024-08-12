@@ -37,6 +37,37 @@ def createPeriods(data, solution):
 
     return periods
 
+    #     periods = []
+    #     periodTmp = []
+    #     currantPoss = 0
+    #     currantPeriod = 0
+
+    #     periodTime = data['timeDuration']
+    #     periodResource = data['resourceConstraint']
+
+    #     for i, tarefa in enumerate(solution):
+    #         jobTime = data['processingTimes'][tarefa]
+    #         jobResource = data['resourceConsumption'][tarefa]
+
+    #         currantPoss += jobTime
+            
+    #         if jobTime <= periodTime and jobResource <= periodResource:
+    #             periodTime -= jobTime
+    #             periodResource -= jobResource
+    #         else:
+    #             periods.append(periodTmp)
+    #             periodTmp = []
+    #             currantPeriod += 1
+    #             currantPoss = 0 + jobTime
+    #             periodTime = data['timeDuration'] - jobTime
+    #             periodResource = data['resourceConstraint'] - jobResource
+
+    #         periodTmp.append({ 'tarefa': tarefa, 'inicio': currantPoss - data['processingTimes'][tarefa], 'fim': currantPoss })
+
+    #     periods.append(periodTmp)
+
+    #     return periods
+
 def plotGraph(data, periods):
     fig, ax = plt.subplots()
 
