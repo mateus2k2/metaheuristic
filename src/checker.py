@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import evaluate as evaluate
 
-# export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
-
 def checkSolution(data, periods):
     if len(periods) > data['numPeriods']:
         return False
@@ -11,33 +9,31 @@ def checkSolution(data, periods):
 
 def createPeriods(data, solution):
     periods = []
-    periodTmp = []
-    currantPoss = 0
-    currantPeriod = 0
 
-    periodTime = data['timeDuration']
-    periodResource = data['resourceConstraint']
+    for period in solution:
+        periodTmp = []
+        periodTime = data['timeDuration']
+        periodResource = data['resourceConstraint']
+        currantPoss = 0
 
-    for i, tarefa in enumerate(solution):
-        jobTime = data['processingTimes'][tarefa]
-        jobResource = data['resourceConsumption'][tarefa]
+        for tarefa in period:
+            jobTime = data['processingTimes'][tarefa]
+            jobResource = data['resourceConsumption'][tarefa]
 
-        currantPoss += jobTime
-        
-        if jobTime <= periodTime and jobResource <= periodResource:
-            periodTime -= jobTime
-            periodResource -= jobResource
-        else:
-            periods.append(periodTmp)
-            periodTmp = []
-            currantPeriod += 1
-            currantPoss = 0 + jobTime
-            periodTime = data['timeDuration'] - jobTime
-            periodResource = data['resourceConstraint'] - jobResource
+            if jobTime <= periodTime and jobResource <= periodResource:
+                periodTime -= jobTime
+                periodResource -= jobResource
+            else:
+                break  # If a job doesn't fit, stop processing this period
 
-        periodTmp.append({ 'tarefa': tarefa, 'inicio': currantPoss - data['processingTimes'][tarefa], 'fim': currantPoss })
+            periodTmp.append({
+                'tarefa': tarefa,
+                'inicio': currantPoss,
+                'fim': currantPoss + jobTime
+            })
+            currantPoss += jobTime
 
-    periods.append(periodTmp)
+        periods.append(periodTmp)
 
     return periods
 
@@ -82,18 +78,17 @@ def plotGraph(data, periods):
     ax.set_ylim(-0.5, 4.5)
     plt.show()
 
-def main(data, solution, graph=False, prints=False):
+def main(data, periods, graph=False, prints=False):
 
-    periods = createPeriods(data, solution)
     result = checkSolution(data, periods)
     
     if prints:
         print("Recurso por periodo: ", data['resourceConstraint'])
         print("Tempo por periodo: ", data['timeDuration'])
-        print("Evaluation: ", evaluate.evaluate(data, solution))
-        print("Solution: ", solution)
+        print("Evaluation: ", evaluate.evaluate(data, periods))
+        print("Solution: ", periods)
         print("Check", result)
         print("Num Periods: ", data['numPeriods'])
         print("Periods Used: ", len(periods))
 
-    if graph: plotGraph(data, periods)
+    if graph: plotGraph(data, createPeriods(data, periods))

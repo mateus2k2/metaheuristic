@@ -6,12 +6,12 @@ import evaluate as evaluate
 
 def sum_jobs(data):
     jobs = list(range(data['numJobs']))
-    jobs.sort(key=lambda job: (data["processingTimes"][job], data["resourceConsumption"][job]))
+    jobs.sort(key=lambda job: (data["processingTimes"][job] + data["resourceConsumption"][job]))
     return jobs
 
 def avg_jobs(data):
     jobs = list(range(data['numJobs']))
-    jobs.sort(key=lambda job: (data["processingTimes"][job], data["resourceConsumption"][job]) / 2)
+    jobs.sort(key=lambda job: (data["processingTimes"][job] + data["resourceConsumption"][job]) / 2)
     return jobs
 
 def max_jobs(data):
@@ -90,8 +90,8 @@ def first_fit(data, jobs):
             period_resource.append(resourceConsumption[job])
 
     # return the flat periods list
-    flatPeriods = [job for period in periods for job in period]
-    return 0, evaluate.evaluate(data, flatPeriods), flatPeriods
+    non_empty = [lst for lst in periods if lst]
+    return 0, evaluate.evaluate(data, non_empty), non_empty
 
 def best_fit(data, jobs):
     numJobs = data['numJobs']
@@ -125,15 +125,19 @@ def best_fit(data, jobs):
             period_time[best_period] += processingTimes[job]
             period_resource[best_period] += resourceConsumption[job]
 
-    flatPeriods = [job for period in periods for job in period]
-    return 0, evaluate.evaluate(data, flatPeriods), flatPeriods
+    non_empty = [lst for lst in periods if lst]
+    return 0, evaluate.evaluate(data, non_empty), non_empty
+
+# ------------------------------------------------------------------------------------------------
+# HELPER
+# ------------------------------------------------------------------------------------------------
 
 def main(data, phase1, phase2, phase3):
     jobs = None
 
     if phase1 == "sum":
         jobs = sum_jobs(data)
-    elif phase1 == "avr":
+    elif phase1 == "avg":
         jobs = avg_jobs(data)
     elif phase1 == "max":
         jobs = max_jobs(data)

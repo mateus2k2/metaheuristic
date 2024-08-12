@@ -1,342 +1,221 @@
 {
-    "queeu": [
+    "queue": [
         {
             "method": "constructive",
             "parans": {
                 "phase1": "sum",
-                "phase2": "LPD",
+                "phase2": "LPT",
                 "phase3": "first_fit"
             },
             "id": "SFFD",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "10"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "constructive",
+            "parans": {
+                "phase1": "avg",
+                "phase2": "LPT",
+                "phase3": "first_fit"
+            },
+            "id": "AFFD",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "max",
-                "phase2": "LPD",
+                "phase2": "LPT",
                 "phase3": "first_fit"
             },
             "id": "MFFD",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "10"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "sum",
-                "phase2": "LPD",
+                "phase2": "A-Sharp",
                 "phase3": "first_fit"
             },
-            "id": "SFFD",
+            "id": "SFFA",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "20"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "constructive",
+            "parans": {
+                "phase1": "avg",
+                "phase2": "A-Sharp",
+                "phase3": "first_fit"
+            },
+            "id": "AFFA",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "max",
-                "phase2": "LPD",
+                "phase2": "A-Sharp",
                 "phase3": "first_fit"
             },
-            "id": "MFFD",
+            "id": "MFFA",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "20"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "sum",
-                "phase2": "LPD",
+                "phase2": "HILO",
                 "phase3": "first_fit"
             },
-            "id": "SFFD",
+            "id": "SFFHILO",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "30"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "constructive",
+            "parans": {
+                "phase1": "avg",
+                "phase2": "HILO",
+                "phase3": "first_fit"
+            },
+            "id": "AFFHILO",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "max",
-                "phase2": "LPD",
+                "phase2": "HILO",
                 "phase3": "first_fit"
             },
-            "id": "MFFD",
+            "id": "MFFHILO",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "30"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase2": "LPT",
+                "phase3": "best_fit"
             },
-            "id": "SFFD",
+            "id": "SBFD",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "40"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "constructive",
+            "parans": {
+                "phase1": "avg",
+                "phase2": "LPT",
+                "phase3": "best_fit"
+            },
+            "id": "ABFD",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase2": "LPT",
+                "phase3": "best_fit"
             },
-            "id": "MFFD",
+            "id": "MBFD",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "40"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase2": "A-Sharp",
+                "phase3": "best_fit"
             },
-            "id": "SFFD",
+            "id": "SBFA",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "50"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "constructive",
+            "parans": {
+                "phase1": "avg",
+                "phase2": "A-Sharp",
+                "phase3": "best_fit"
+            },
+            "id": "ABFA",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase2": "A-Sharp",
+                "phase3": "best_fit"
             },
-            "id": "MFFD",
+            "id": "MBFA",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "50"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase2": "HILO",
+                "phase3": "best_fit"
             },
-            "id": "SFFD",
+            "id": "SBFHILO",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "60"
-                    },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "60"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase1": "avg",
+                "phase2": "HILO",
+                "phase3": "best_fit"
             },
-            "id": "SFFD",
+            "id": "ABFHILO",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "70"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         },
         {
             "method": "constructive",
             "parans": {
                 "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
+                "phase2": "HILO",
+                "phase3": "best_fit"
             },
-            "id": "MFFD",
+            "id": "MBFHILO",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "70"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "80"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "80"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "90"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2":   "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "90"
-        },
-                {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "100"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "100"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "110"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "110"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "120"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "120"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "130"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "130"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "sum",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "SFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "140"
-        },
-        {
-            "method": "constructive",
-            "parans": {
-                "phase1": "max",
-                "phase2": "LPD",
-                "phase3": "first_fit"
-            },
-            "id": "MFFD",
-            "numOfTimesToRun": 10,
-            "maxFilesToRunPerClass": 10,
-            "fileSizeClass": "140"
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         }
-
     ],
     "fileClasses": {
         "10": [
@@ -508,8 +387,7 @@
             "data/inputs/sm140.txt"
         ]
     },
-    "classToNumberOfJobs":
-    {
+    "classToNumberOfJobs": {
         "10": 10,
         "20": 20,
         "30": 30,
