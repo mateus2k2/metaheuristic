@@ -13,9 +13,10 @@ Command-line interface for your Python script.
 
 positional arguments:
   {run,analysis}  Sub-command to run.
-    run           Run the main process.
+    run           Run the main method.
     analysis      Run analysis on the input file.
-    constructive  Run the constructive process.
+    constructive  Run the constructive method.
+    MILP          Run the MILP method.
 
 options:
   -h, --help      show this help message and exit
