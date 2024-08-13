@@ -2,10 +2,11 @@ import json
 import statistics
 import time
 import math
-import matplotlib.pyplot as plt
 from scipy import stats
 import numpy as np
 
+import analysis as analysis
+import options as options
 
 import load as load
 import checker as checker
@@ -20,10 +21,10 @@ import methods.construtivas as construtivas
 # Rodar os métodos
 # ------------------------------------------------------------------------------------------------------------------------
 
-def run():
+def run(input, output, prints=False):
     results = []
 
-    batch = open('data/batch.json', 'r')
+    batch = open(input, 'r')
     batch = json.load(batch)
 
     for item in batch["queue"]:
@@ -33,8 +34,8 @@ def run():
                 file = batch["fileClasses"][className][i]
                 data = load.load(file)
                 fileResults = []
-
-                print(f"File: {file} | Method: {item['method']} | Id: {item['id']}")
+                
+                if prints: print(f"File: {file} | Method: {item['method']} | Id: {item['id']}")
 
                 for i in range(0, item["numOfTimesToRun"]):
                     runTime, value, solution = 0, 0, []
@@ -66,69 +67,45 @@ def run():
                 mean_time = statistics.mean(times)
 
                 rpd = ((mean_value - (lower_bound))/(lower_bound)) * 100
-
-                # print(f"Lower bound: {lower_bound}")
-                # print(f"RPD: {rpd}")
-                # print(f"Mean time: {mean_time}")
-                # print(f"Best value: {best_value}")
-                # print(f"Mean value: {mean_value}")
-                # print(f"Best solution: {best_solution}")
-                # checker.main(data, best_solution, graph=False, prints=True)
-                # print("\n\n")
+                
+                if prints:
+                    print(f"Lower bound: {lower_bound}")
+                    print(f"RPD: {rpd}")
+                    print(f"Mean time: {mean_time}")
+                    print(f"Best value: {best_value}")
+                    print(f"Mean value: {mean_value}")
+                    print(f"Best solution: {best_solution}")
+                    checker.main(data, best_solution, graph=False, prints=True)
+                    print("\n\n")
 
                 itemResult[file] = {"fileResults": fileResults, "meanValue": mean_value, "meanTime": mean_time, "bestValue": best_value, "bestSolution": best_solution, "rpd": rpd, "lowerBound": lower_bound}
 
             results.append({"itemResult": itemResult, "item": item})
 
-    resultsFile = open('data/results.json', 'w')
+    resultsFile = open(output, 'w')
     json.dump(results, resultsFile, indent=1, separators=(',', ':'))
 
 # ------------------------------------------------------------------------------------------------------------------------
-# Analisar os resultados
+# Comandos
 # ------------------------------------------------------------------------------------------------------------------------
 
-def analysis():
-    with open('data/results.json', 'r') as results_file:
-        results = json.load(results_file)
+args = options.parse_args()
+if args.command == 'run':
+    run(args.input, args.output, args.prints)
 
-    fileSizeClass = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "150", "200", "250", "300"]
-    avrRPDValues = {}
-    avrTimeValues = {}
+elif args.command == 'analysis':
+    analysis.analysis(args.input)
 
-    for item in results:
-        rpd_values = [item['itemResult'][file]['rpd'] for file in item['itemResult']]
-        time_values = [item['itemResult'][file]['meanTime'] for file in item['itemResult']]
+elif args.command == 'constructive':
+    data = load.load(args.input)
+    _, _, resulut = construtivas.main(data, args.phase1, args.phase2, args.phase3)
+    if args.graph:
+        checker.main(data, resulut, graph=True, prints=True)
 
-        avrRPD = sum(rpd_values) / len(rpd_values)
-        avrRPDValues.setdefault(item['item']["id"], []).append(avrRPD)
+elif args.command == 'MILP':
+    data = load.load(args.input)
+    _, _, resulut = MILP.runMILP(data)
+    print(resulut)
+    if args.graph:
+        checker.main(data, resulut, graph=True, prints=True)
 
-        avrTime = sum(time_values) / len(time_values)
-        avrTimeValues.setdefault(item['item']["id"], []).append(avrTime)
-
-    plt.figure(figsize=(10, 6))
-
-    # Define 20 distinct colors
-    colors = [
-        'b', 'g', 'r', 'c', 'm', 'y', 'k', 'orange', 'purple', 'brown',
-        'pink', 'lime', 'navy', 'teal', 'coral', 'gold', 'darkgreen', 
-        'darkred', 'violet', 'gray'
-    ]
-
-    for i, key in enumerate(avrRPDValues):
-        plt.plot(fileSizeClass, avrRPDValues[key], label=key, marker='o', linewidth=2, color=colors[i % len(colors)])
-        # plt.plot(fileSizeClass, avrTimeValues[key], label=key, marker='o', linewidth=2, color=colors[i % len(colors)])
-
-    plt.grid(True)
-    plt.xlabel('Tamanhos de Instâncias')
-    plt.ylabel('RPD')
-    # plt.ylabel('Tempo de Execução')
-
-    plt.legend()
-    # plt.savefig('data/outputs/rpds.png')
-    # plt.savefig('data/outputs/times.png')
-    
-    plt.show()
-
-
-analysis()
-# run()

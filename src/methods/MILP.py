@@ -67,7 +67,7 @@ def convertSolution(solutionCPLX):
     w_values = [int(name.split('_')[1]) - 1 for name, value in zip(var_names, solution_values) if name.startswith('w_') and value > 0.5][0]
     sorted_periods.append(sorted_periods.pop(w_values))
 
-    return [job for period in sorted_periods for job in period]
+    return sorted_periods
 
 def runMILP(instance):
     J = list(range(1, instance['numJobs'] + 1))  # number of jobs
