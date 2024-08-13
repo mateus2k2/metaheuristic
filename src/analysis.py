@@ -2,8 +2,8 @@
 import json
 import matplotlib.pyplot as plt
 
-def analysis():
-    with open('data/results.json', 'r') as results_file:
+def analysis(input):
+    with open(input, 'r') as results_file:
         results = json.load(results_file)
 
     fileSizeClass = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "150", "200", "250", "300"]

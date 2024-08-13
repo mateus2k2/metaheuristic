@@ -14,7 +14,6 @@ import checker as checker
 import methods.MILP as MILP
 import methods.construtivas as construtivas
 
-# make run >> ./src/data/logs/exec.log
 # export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
 
 # ------------------------------------------------------------------------------------------------------------------------
