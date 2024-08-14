@@ -104,7 +104,6 @@ elif args.command == 'constructive':
 elif args.command == 'MILP':
     data = load.load(args.input)
     _, _, resulut = MILP.runMILP(data)
-    print(resulut)
     if args.graph:
         checker.main(data, resulut, graph=True, prints=True)
 
