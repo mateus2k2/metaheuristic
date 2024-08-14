@@ -14,7 +14,7 @@ import checker as checker
 import methods.MILP as MILP
 import methods.construtivas as construtivas
 
-# export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
+# export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
 
 # ------------------------------------------------------------------------------------------------------------------------
 # Rodar os métodos
