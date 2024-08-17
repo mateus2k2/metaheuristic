@@ -7,7 +7,6 @@ import numpy as np
 
 import analysis as analysis
 import options as options
-
 import load as load
 import checker as checker
 

@@ -1,5 +1,12 @@
 # Executar
 
+Requer Python e o docplex instalado. Para instalar o docplex
+Link para os intaladores do docplex: https://drive.google.com/drive/folders/1mwwU_0wrtVMkreW51i8hSm1CIfZNOwN0?usp=drive_link
+Siga as instrucões do instalador para instalar o docplex.
+Demais dependencias podem ser instaladas com o comando:
+
+pip install -r requirements.txt
+
 ```
 python3 main.py -h
 ```
