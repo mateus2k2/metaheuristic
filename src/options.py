@@ -28,6 +28,10 @@ def parse_args():
     MILP_parser.add_argument('--graph', '-g', action='store_true', help='Creates a Graph.')
     MILP_parser.add_argument('--input', '-i', required=True, help='Path to the input file.')
 
+    localSearch_parser = subparsers.add_parser('localSearch', help='Run the localSearch method.')
+    localSearch_parser.add_argument('--graph', '-g', action='store_true', help='Creates a Graph.')
+    localSearch_parser.add_argument('--input', '-i', required=True, help='Path to the input file.')
+
     args = parser.parse_args()
 
     # Validate file paths

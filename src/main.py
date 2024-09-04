@@ -1,9 +1,9 @@
 import json
 import statistics
 import time
-import math
-from scipy import stats
-import numpy as np
+# import math
+# from scipy import stats
+# import numpy as np
 
 import analysis as analysis
 import options as options
@@ -12,6 +12,7 @@ import checker as checker
 
 import methods.MILP as MILP
 import methods.construtivas as construtivas
+import methods.localSearch as localSearch
 
 # export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
 
@@ -43,6 +44,8 @@ def run(input, output, prints=False):
                         runTime, value, solution = MILP.runMILP(data)
                     elif item["method"] == "constructive":
                         runTime, value, solution = construtivas.main(data, item["parans"]["phase1"], item["parans"]["phase2"], item["parans"]["phase3"])
+                    elif item["method"] == "localSearch":
+                        runTime, value, solution = localSearch.main(data)
                     end_time = time.perf_counter()
                     
                     fileResults.append({"value": value, "solution": solution, "time": end_time - start_time})
@@ -106,3 +109,8 @@ elif args.command == 'MILP':
     if args.graph:
         checker.main(data, resulut, graph=True, prints=True)
 
+elif args.command == 'localSearch':
+    data = load.load(args.input)
+    _, _, resulut = localSearch.main(data)
+    if args.graph:
+        checker.main(data, resulut, graph=True, prints=True)
