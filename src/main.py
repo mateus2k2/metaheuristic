@@ -26,9 +26,9 @@ def run(input, output, prints=1):
     batch = open(input, 'r')
     batch = json.load(batch)
 
-    for item in batch["queue"]:
+    for i, item in enumerate(batch["queue"]):
         print()
-        if prints > 0: print(f"Method: {item['method']}")
+        if prints > 0: print(f"Method: {item['id']} | Num: {i+1}/{len(batch['queue'])}")
         
         for l, className in enumerate(item["fileSizeClass"]):
             itemResult = {}
@@ -50,7 +50,7 @@ def run(input, output, prints=1):
                     elif item["method"] == "constructive":
                         runTime, value, solution = construtivas.main(data, item["parans"]["phase1"], item["parans"]["phase2"], item["parans"]["phase3"])
                     elif item["method"] == "localSearch":
-                        runTime, value, solution = localSearch.main(data, item["parans"]["initial"], item["parans"]["neighborhood"], item["parans"]["fit"])
+                        runTime, value, solution = localSearch.main(data, item["parans"]["maxIterations"], item["parans"]["initial"], item["parans"]["neighborhood"], item["parans"]["fit"])
                     end_time = time.perf_counter()
                     
                     fileResults.append({"value": value, "solution": solution, "time": end_time - start_time})
@@ -120,6 +120,6 @@ elif args.command == 'MILP':
 
 elif args.command == 'localSearch':
     data = load.load(args.input)
-    _, _, resulut = localSearch.main(data, args.initial, args.neighborhood, args.fit)
+    _, _, resulut = localSearch.main(data, args.maxIterations, args.initial, args.neighborhood, args.fit)
     if args.graph:
         checker.main(data, resulut, graph=True, prints=True)

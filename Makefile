@@ -12,4 +12,4 @@ MILP:
 	clear && cd src && python3 main.py MILP --input data/inputs/sm4.txt --graph
 
 localSearch:
-	clear && cd src && python3 main.py localSearch --input data/inputs/sm1.txt --initial constructive --neighborhood two_opt --fit bestFit --graph
+	clear && cd src && python3 main.py localSearch --input data/inputs/sm1.txt --initial constructive --neighborhood two_opt --fit bestFit --maxIterations 10000 --graph

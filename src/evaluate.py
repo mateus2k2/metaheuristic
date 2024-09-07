@@ -14,7 +14,6 @@ def evaluate(data, solution):
 
     return makeSpan
 
-
 def evaluateList(data, solution):
     bigNumber = 10000000
     makeSpan = 0
@@ -42,3 +41,6 @@ def evaluateList(data, solution):
         makeSpan += bigNumber
 
     return makeSpan
+
+def evaluateListBySum(data, solution):
+    return sum(data['processingTimes'][job] for job in solution)

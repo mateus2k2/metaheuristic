@@ -34,6 +34,7 @@ def parse_args():
     localSearch_parser.add_argument('--initial', '-l', required=True, choices=['constructive', 'rand'], help='Initial Solution for the local search')
     localSearch_parser.add_argument('--neighborhood', '-n', required=True, choices=['two_opt', 'two_swap', 'insertion'], help='Neighborhood function for the local seach')
     localSearch_parser.add_argument('--fit', '-f', required=True, choices=['bestFit', 'firstFit'], help='Fit function for the local seach')
+    localSearch_parser.add_argument('--maxIterations', '-m', type=int, required=True, help='Max iterations for the local seach')
 
 
     args = parser.parse_args()

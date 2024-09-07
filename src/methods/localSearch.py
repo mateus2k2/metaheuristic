@@ -31,6 +31,7 @@ def createPeriodsFromList(data, solution):
 def local_search_best_fit(data, initial_solution, neighborhood_func, max_iterations=1000):
     current_solution = initial_solution
     current_value = evaluate.evaluateList(data, current_solution)
+    # current_value = evaluate.evaluateListBySum(data, current_solution)
 
     for iteration in range(max_iterations):
         neighbors = neighborhood_func(current_solution)
@@ -40,6 +41,7 @@ def local_search_best_fit(data, initial_solution, neighborhood_func, max_iterati
 
         for neighbor in neighbors:
             value = evaluate.evaluateList(data, neighbor)
+            # value = evaluate.evaluateListBySum(data, neighbor)
             if value < best_value:
                 best_value = value
                 best_neighbor = neighbor
@@ -77,7 +79,7 @@ def local_search_first_fit(data, initial_solution, neighborhood_func, max_iterat
 
     return current_solution, current_value
 
-def main(data, initial_paran, neighborhood_func_paran, fit_paran):
+def main(data, maxIterations, initial_paran, neighborhood_func_paran, fit_paran):
 
     initial_solution = None
     if initial_paran == "constructive":    
@@ -94,8 +96,8 @@ def main(data, initial_paran, neighborhood_func_paran, fit_paran):
     if neighborhood_func_paran == "insertion": neighborhood_func = neighborhood.insertion
     
     new_solution = None
-    if fit_paran == "bestFit": new_solution, _ = local_search_best_fit(data, flat_list, neighborhood_func, 1000000)
-    if fit_paran == "firstFit": new_solution, _ = local_search_first_fit(data, flat_list, neighborhood_func, 1000000)
+    if fit_paran == "bestFit": new_solution, _ = local_search_best_fit(data, flat_list, neighborhood_func, maxIterations)
+    if fit_paran == "firstFit": new_solution, _ = local_search_first_fit(data, flat_list, neighborhood_func, maxIterations)
      
     encoded_solution = createPeriodsFromList(data, new_solution)
 
