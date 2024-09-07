@@ -20,21 +20,26 @@ import methods.localSearch as localSearch
 # Rodar os métodos
 # ------------------------------------------------------------------------------------------------------------------------
 
-def run(input, output, prints=False):
+def run(input, output, prints=1):
     results = []
 
     batch = open(input, 'r')
     batch = json.load(batch)
 
     for item in batch["queue"]:
-        for className in item["fileSizeClass"]:
+        print()
+        if prints > 0: print(f"Method: {item['method']}")
+        
+        for l, className in enumerate(item["fileSizeClass"]):
             itemResult = {}
+            if prints > 0: print(f"Class: {className} Num: {l+1}/{len(item['fileSizeClass'])}")
+            
             for i in range(0, item["maxFilesToRunPerClass"]):
                 file = batch["fileClasses"][className][i]
                 data = load.load(file)
                 fileResults = []
                 
-                if prints: print(f"File: {file} | Method: {item['method']} | Id: {item['id']}")
+                if prints > 0: print(f"\tFile: {file} | Id: {item['id']} | Num: {i+1}/{item['maxFilesToRunPerClass']}")
 
                 for i in range(0, item["numOfTimesToRun"]):
                     runTime, value, solution = 0, 0, []
@@ -45,7 +50,7 @@ def run(input, output, prints=False):
                     elif item["method"] == "constructive":
                         runTime, value, solution = construtivas.main(data, item["parans"]["phase1"], item["parans"]["phase2"], item["parans"]["phase3"])
                     elif item["method"] == "localSearch":
-                        runTime, value, solution = localSearch.main(data)
+                        runTime, value, solution = localSearch.main(data, item["parans"]["initial"], item["parans"]["neighborhood"], item["parans"]["fit"])
                     end_time = time.perf_counter()
                     
                     fileResults.append({"value": value, "solution": solution, "time": end_time - start_time})
@@ -69,7 +74,11 @@ def run(input, output, prints=False):
 
                 rpd = ((mean_value - (lower_bound))/(lower_bound)) * 100
                 
-                if prints:
+                if prints > 2:
+                    print("Check: ", len(best_solution) > data['numPeriods'])
+                
+                if prints > 3:
+                    print("-----------------------------------")
                     print(f"Lower bound: {lower_bound}")
                     print(f"RPD: {rpd}")
                     print(f"Mean time: {mean_time}")
@@ -77,7 +86,7 @@ def run(input, output, prints=False):
                     print(f"Mean value: {mean_value}")
                     print(f"Best solution: {best_solution}")
                     checker.main(data, best_solution, graph=False, prints=True)
-                    print("\n\n")
+                    print("-----------------------------------")
 
                 itemResult[file] = {"fileResults": fileResults, "meanValue": mean_value, "meanTime": mean_time, "bestValue": best_value, "bestSolution": best_solution, "rpd": rpd, "lowerBound": lower_bound}
 
@@ -95,7 +104,7 @@ if args.command == 'run':
     run(args.input, args.output, args.prints)
 
 elif args.command == 'analysis':
-    analysis.analysis(args.input)
+    analysis.analysis(args.input, args.output, args.type, args.version)
 
 elif args.command == 'constructive':
     data = load.load(args.input)
@@ -111,6 +120,6 @@ elif args.command == 'MILP':
 
 elif args.command == 'localSearch':
     data = load.load(args.input)
-    _, _, resulut = localSearch.main(data)
+    _, _, resulut = localSearch.main(data, args.initial, args.neighborhood, args.fit)
     if args.graph:
         checker.main(data, resulut, graph=True, prints=True)

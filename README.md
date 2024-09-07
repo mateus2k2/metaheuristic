@@ -24,6 +24,7 @@ positional arguments:
     analysis      Run analysis on the input file.
     constructive  Run the constructive method.
     MILP          Run the MILP method.
+    localSearch   Run the localSearch method.
 
 options:
   -h, --help      show this help message and exit

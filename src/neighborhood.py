@@ -1,49 +1,6 @@
 import random
 import itertools
 
-def simple(solution):
-    neighbors = []
-    length = len(solution)
-
-    for i in range(length - 1):
-        neighbor = solution[:]
-        neighbor[i], neighbor[i + 1] = neighbor[i + 1], neighbor[i]
-        neighbors.append(neighbor)
-    
-    return neighbors
-
-def randonInsertion(solution):
-    neighbors = []
-    length = len(solution)
-
-    for i in range(length - 1):
-        neighbor = solution[:]
-        index = random.randint(0, length - 1)
-        neighbor.insert(index, neighbor.pop(i))
-        neighbors.append(neighbor)
-    
-    return neighbors
-
-def generate_neighbors(solution):
-    neighbors = []
-    n = len(solution)
-    
-    # Generate all neighbors by swapping pairs of elements
-    for i in range(n):
-        for j in range(i + 1, n):
-            # Create a copy of the current solution
-            neighbor = solution.copy()
-            # Swap elements at index i and j
-            neighbor[i], neighbor[j] = neighbor[j], neighbor[i]
-            # Add the new neighbor to the list
-            neighbors.append(neighbor)
-    
-    return neighbors
-
-def allPermutations(solution):
-    neighbors = list(itertools.permutations(solution))
-    return neighbors
-
 def two_opt(solution):
     neighbors = []
 

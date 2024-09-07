@@ -3,7 +3,7 @@
         {
             "method": "constructive",
             "parans": {
-                "phase1": "sum",
+                "phase1": "max",
                 "phase2": "LPT",
                 "phase3": "first_fit"
             },
@@ -14,8 +14,144 @@
         },
         {
             "method": "localSearch",
-            "parans": {},
-            "id": "localSearch",
+            "parans": {
+                "initial": "constructive",
+                "neighborhood": "two_opt",
+                "fit": "bestFit"
+            },
+            "id": "localSearch1",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "constructive",
+                "neighborhood": "two_opt",
+                "fit": "firstFit"
+            },
+            "id": "localSearch2",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "constructive",
+                "neighborhood": "two_swap",
+                "fit": "bestFit"
+            },
+            "id": "localSearch3",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "constructive",
+                "neighborhood": "two_swap",
+                "fit": "firstFit"
+            },
+            "id": "localSearch4",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "constructive",
+                "neighborhood": "insertion",
+                "fit": "bestFit"
+            },
+            "id": "localSearch5",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "constructive",
+                "neighborhood": "insertion",
+                "fit": "firstFit"
+            },
+            "id": "localSearch6",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "rand",
+                "neighborhood": "two_opt",
+                "fit": "bestFit"
+            },
+            "id": "localSearch7",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "rand",
+                "neighborhood": "two_opt",
+                "fit": "firstFit"
+            },
+            "id": "localSearch8",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "rand",
+                "neighborhood": "two_swap",
+                "fit": "bestFit"
+            },
+            "id": "localSearch9",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "rand",
+                "neighborhood": "two_swap",
+                "fit": "firstFit"
+            },
+            "id": "localSearch10",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "rand",
+                "neighborhood": "insertion",
+                "fit": "bestFit"
+            },
+            "id": "localSearch11",
+            "numOfTimesToRun": 10,
+            "maxFilesToRunPerClass": 10,
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
+        },
+        {
+            "method": "localSearch",
+            "parans": {
+                "initial": "rand",
+                "neighborhood": "insertion",
+                "fit": "firstFit"
+            },
+            "id": "localSearch12",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
             "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
