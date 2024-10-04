@@ -1,6 +1,7 @@
 import json
 import statistics
 import time
+import orjson
 # import math
 # from scipy import stats
 # import numpy as np
@@ -9,12 +10,12 @@ import analysis as analysis
 import options as options
 import load as load
 import checker as checker
+import evaluate as evaluate
 
 import methods.MILP as MILP
 import methods.construtivas as construtivas
 import methods.localSearch as localSearch
-
-# export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+import methods.VND as VND
 
 # ------------------------------------------------------------------------------------------------------------------------
 # Rodar os métodos
@@ -51,6 +52,8 @@ def run(input, output, prints=1):
                         runTime, value, solution = construtivas.main(data, item["parans"]["phase1"], item["parans"]["phase2"], item["parans"]["phase3"])
                     elif item["method"] == "localSearch":
                         runTime, value, solution = localSearch.main(data, item["parans"]["maxIterations"], item["parans"]["initial"], item["parans"]["neighborhood"], item["parans"]["fit"])
+                    elif item["method"] == "VND":
+                        runTime, value, solution = VND.main(data, item["parans"]["initial"], item["parans"]["max_iterations"], item["parans"]["iterations_without_improvement"], item["parans"]["p_max"])
                     end_time = time.perf_counter()
                     
                     fileResults.append({"value": value, "solution": solution, "time": end_time - start_time})
@@ -94,6 +97,7 @@ def run(input, output, prints=1):
 
     resultsFile = open(output, 'w')
     json.dump(results, resultsFile, indent=1, separators=(',', ':'))
+    # resultsFile.write(orjson.dumps(data))
 
 # ------------------------------------------------------------------------------------------------------------------------
 # Comandos
@@ -123,3 +127,11 @@ elif args.command == 'localSearch':
     _, _, resulut = localSearch.main(data, args.maxIterations, args.initial, args.neighborhood, args.fit)
     if args.graph:
         checker.main(data, resulut, graph=True, prints=True)
+
+elif args.command == 'VND':
+    data = load.load(args.input)
+    _, _, resulut = VND.main(data, args.initial, args.max_iterations, args.iterations_without_improvement, args.p_max)
+    if args.graph:
+        checker.main(data, resulut, graph=True, prints=True)
+    if args.obj:
+        print(evaluate.getRPD(data, resulut))

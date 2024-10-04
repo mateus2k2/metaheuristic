@@ -1,7 +1,6 @@
 def getRPD(data, solution):
     value = evaluate(data, solution)
     lower_bound = sum(data["processingTimes"])
-    print(lower_bound)
     rpd = ((value - (lower_bound))/(lower_bound)) * 100
     return rpd
 

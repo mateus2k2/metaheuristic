@@ -1,32 +1,10 @@
 import methods.construtivas as construtivas
 import neighborhood as neighborhood
+import analysis as analysis
 import evaluate as evaluate
 import random
 
-def createPeriodsFromList(data, solution):
-    periods = []
-    curPeriod = []
-    periodTime = data['timeDuration']
-    periodResource = data['resourceConstraint']
 
-    for tarefa in solution:
-        jobTime = data['processingTimes'][tarefa]
-        jobResource = data['resourceConsumption'][tarefa]
-
-        if jobTime <= periodTime and jobResource <= periodResource:
-            periodTime -= jobTime
-            periodResource -= jobResource
-            curPeriod.append(tarefa)
-        else:
-            periods.append(curPeriod)
-            curPeriod = [tarefa]
-            periodTime = data['timeDuration'] - jobTime
-            periodResource = data['resourceConstraint'] - jobResource
-
-    if curPeriod:
-        periods.append(curPeriod)
-
-    return periods
 
 def local_search_best_fit(data, initial_solution, neighborhood_func, max_iterations=1000):
     current_solution = initial_solution
@@ -99,6 +77,6 @@ def main(data, maxIterations, initial_paran, neighborhood_func_paran, fit_paran)
     if fit_paran == "bestFit": new_solution, _ = local_search_best_fit(data, flat_list, neighborhood_func, maxIterations)
     if fit_paran == "firstFit": new_solution, _ = local_search_first_fit(data, flat_list, neighborhood_func, maxIterations)
      
-    encoded_solution = createPeriodsFromList(data, new_solution)
+    encoded_solution = analysis.createPeriodsFromList(data, new_solution)
 
     return 0, evaluate.evaluate(data, encoded_solution), encoded_solution

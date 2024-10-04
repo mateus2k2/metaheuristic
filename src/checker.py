@@ -89,5 +89,6 @@ def main(data, periods, graph=False, prints=False):
         print("Check", result)
         print("Num Periods: ", data['numPeriods'])
         print("Periods Used: ", len(periods))
+        print("RDP: ", evaluate.getRPD(data, periods))
 
     if graph: plotGraph(data, createGraphPeriods(data, periods))

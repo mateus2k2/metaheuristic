@@ -35,7 +35,16 @@ def parse_args():
     localSearch_parser.add_argument('--neighborhood', '-n', required=True, choices=['two_opt', 'two_swap', 'insertion'], help='Neighborhood function for the local seach')
     localSearch_parser.add_argument('--fit', '-f', required=True, choices=['bestFit', 'firstFit'], help='Fit function for the local seach')
     localSearch_parser.add_argument('--maxIterations', '-m', type=int, required=True, help='Max iterations for the local seach')
-
+    
+    vnd_parser = subparsers.add_parser('VND', help='Run the VND method.')
+    vnd_parser.add_argument('--graph', '-g', action='store_true', help='Creates a Graph.')
+    vnd_parser.add_argument('--obj', '-f', action='store_true', help='Creates a Graph.')
+    vnd_parser.add_argument('--time', '-t', action='store_true', help='Creates a Graph.')
+    vnd_parser.add_argument('--input', '-i', required=True, help='Path to the input file.')
+    vnd_parser.add_argument('--initial', '-l', required=True, choices=['constructive', 'rand'], help='Initial Solution for the VND')
+    vnd_parser.add_argument('--max_iterations', '-m', type=int, required=True, help='Max iterations for VND')
+    vnd_parser.add_argument('--iterations_without_improvement', '-mw', type=int, required=True, help='Max Iterations without improvement for VND')
+    vnd_parser.add_argument('--p_max', '-p', required=True, type=int, help='P Max for VND')
 
     args = parser.parse_args()
 
@@ -55,3 +64,5 @@ def parse_args():
 
 def validateJson(file):
     pass
+
+# python3 main.py VND --input data/inputs/sm1.txt --initial constructive --max_iterations 10000 --iterations_without_improvement 10 --p_max 5 --shake random --obj
