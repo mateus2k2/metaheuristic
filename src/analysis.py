@@ -164,29 +164,29 @@ def createPeriodsFromList(data, solution):
 
     return periods
 
-def analysis(input, output, type='rpd', version='avr'):
-    with open(input, 'r') as results_file:
-        results = json.load(results_file)
-
+def analysis(inputs, output, type='rpd', version='avr'):
     fileSizeClass = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "150", "200", "250", "300"]
     avrRPDValues = {}
     stdRPDValues = {}
     avrTimeValues = {}
     stdTimeValues = {}
 
-    for item in results:
-        rpd_values = [item['itemResult'][file]['rpd'] for file in item['itemResult']]
-        time_values = [item['itemResult'][file]['meanTime'] for file in item['itemResult']]
+    for input in inputs:
+        with open(input, 'r') as results_file: results = json.load(results_file)
+            
+        for item in results:
+            rpd_values = [item['itemResult'][file]['rpd'] for file in item['itemResult']]
+            time_values = [item['itemResult'][file]['meanTime'] for file in item['itemResult']]
 
-        avrRPD = sum(rpd_values) / len(rpd_values)
-        stdRPD = statistics.stdev(rpd_values) if len(rpd_values) > 1 else 0
-        avrRPDValues.setdefault(item['item']["id"], []).append(avrRPD)
-        stdRPDValues.setdefault(item['item']["id"], []).append(stdRPD)
+            avrRPD = sum(rpd_values) / len(rpd_values)
+            stdRPD = statistics.stdev(rpd_values) if len(rpd_values) > 1 else 0
+            avrRPDValues.setdefault(item['item']["id"], []).append(avrRPD)
+            stdRPDValues.setdefault(item['item']["id"], []).append(stdRPD)
 
-        avrTime = sum(time_values) / len(time_values)
-        stdTime = statistics.stdev(time_values) if len(time_values) > 1 else 0
-        avrTimeValues.setdefault(item['item']["id"], []).append(avrTime)
-        stdTimeValues.setdefault(item['item']["id"], []).append(stdTime)
+            avrTime = sum(time_values) / len(time_values)
+            stdTime = statistics.stdev(time_values) if len(time_values) > 1 else 0
+            avrTimeValues.setdefault(item['item']["id"], []).append(avrTime)
+            stdTimeValues.setdefault(item['item']["id"], []).append(stdTime)
 
     # for each keey in avrRPDValues, complete the list with zeros if is not the same size as fileSizeClass
     for key in avrRPDValues:
@@ -235,7 +235,7 @@ def analysis(input, output, type='rpd', version='avr'):
     
     plt.show()
     
-    # makeTable(type, avrRPDValues, stdRPDValues, avrTimeValues, stdTimeValues, fileSizeClass)
+    makeTable(type, avrRPDValues, stdRPDValues, avrTimeValues, stdTimeValues, fileSizeClass)
 
 def makeTable(type, avrRPDValues, stdRPDValues, avrTimeValues, stdTimeValues, fileSizeClass):
     # Print the data in table format

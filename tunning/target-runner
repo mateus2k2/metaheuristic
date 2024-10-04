@@ -34,7 +34,7 @@ CONFIG_PARAMS=$*
 # BINDIR=$(dirname "$(readlink -f "$(type -P $0 || echo $0)")")
 
 # EDIT THIS: Path to your executable
-EXE="python ../src/main.py"
+EXE="python3 ../src/main.py"
 # EDIT THIS: Specify how parameters are given to your executable
 EXE_PARAMS="VND --input $INSTANCE ${CONFIG_PARAMS} --obj"
 

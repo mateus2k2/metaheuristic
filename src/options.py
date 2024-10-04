@@ -12,7 +12,7 @@ def parse_args():
     run_parser.add_argument('--prints', '-p', type=int, choices=[1, 2, 3], help='Set the print level (1, 2, or 3).')
 
     analysis_parser = subparsers.add_parser('analysis', help='Run analysis on the input file.')
-    analysis_parser.add_argument('--input', '-i', required=True, help='Path to the input file.')
+    analysis_parser.add_argument('--input', '-i', required=True, nargs='+', help='Paths to the input file(s).')
     analysis_parser.add_argument('--output', '-o', help='Path to save the graph img.')
     analysis_parser.add_argument('--type', '-t', choices=['rpd', 'time'], required=True, help='Type of the graph to plot.')
     analysis_parser.add_argument('--version', '-v', choices=['avr', 'std'], required=True, help='Version of the graph to plot.')
@@ -56,8 +56,9 @@ def parse_args():
             raise FileNotFoundError(f"The output directory '{os.path.dirname(args.output)}' does not exist.")
 
     if args.command == 'analysis':
-        if not os.path.exists(args.input):
-            raise FileNotFoundError(f"The input file '{args.input}' does not exist.")
+        for input_file in args.input:
+            if not os.path.exists(input_file):
+                raise FileNotFoundError(f"The input file '{input_file}' does not exist.")
 
     return args
 
