@@ -20,6 +20,7 @@ def dadosArtigo(avrRPDValues, avrTimeValues):
         15.62,
         13.64
     ]
+    
     avrRPDValues["LSBF"] = [
         30.1,
         35.54,
@@ -36,6 +37,7 @@ def dadosArtigo(avrRPDValues, avrTimeValues):
         16.22,
         14.61
     ]
+    
     avrRPDValues["MIP"] = [
         29.37,
         34.96,

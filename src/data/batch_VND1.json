@@ -5,13 +5,13 @@
             "parans": {
                 "initial": "constructive",
                 "max_iterations": 1000000,
-                "iterations_without_improvement": 200,
-                "p_max": 50
+                "iterations_without_improvement": 20,
+                "p_max": 5
             },
             "id": "VND",
             "numOfTimesToRun": 10,
             "maxFilesToRunPerClass": 10,
-            "fileSizeClass": ["10", "20"]
+            "fileSizeClass": ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140"]
         }
     ],
     "fileClasses": {

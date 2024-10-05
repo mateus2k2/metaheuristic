@@ -36,31 +36,45 @@ def insertion(solution):
     return neighbors
 
 # version that return only one neighbor with a degree of perturbation p
-
 def two_opt_perturbation(solution, perturbation_degree):
-    n = len(solution)
-    pos1 = random.randint(0, n-1)
-    max_dist = min(int(perturbation_degree * n), n-1)
-    pos2 = (pos1 + random.randint(1, max_dist)) % n
-    if pos1 > pos2:
-        pos1, pos2 = pos2, pos1
-    return solution[:pos1] + solution[pos1:pos2+1][::-1] + solution[pos2+1:]
+    new_solution = solution[:]
+    for _ in range(perturbation_degree):
+        pos1, pos2 = sorted(random.sample(range(len(new_solution)), 2))
+        new_solution = new_solution[:pos1] + new_solution[pos1:pos2+1][::-1] + new_solution[pos2+1:]
+    return new_solution
 
 def two_swap_perturbation(solution, perturbation_degree):
-    n = len(solution)
-    swaps = max(1, int(perturbation_degree * n)) 
-    for _ in range(swaps):
-        pos1, pos2 = random.sample(range(n), 2)
-        solution[pos1], solution[pos2] = solution[pos2], solution[pos1]
-    return solution
+    new_solution = solution[:]
+    for _ in range(perturbation_degree):
+        pos1, pos2 = random.sample(range(len(new_solution)), 2)
+        new_solution[pos1], new_solution[pos2] = new_solution[pos2], new_solution[pos1]
+    
+    return new_solution
 
 def insertion_perturbation(solution, perturbation_degree):
-    n = len(solution)
-    insertions = max(1, int(perturbation_degree * n)) 
-    for _ in range(insertions):
-        pos1 = random.randint(0, n-1)
-        max_dist = min(int(perturbation_degree * n), n-1)
-        pos2 = (pos1 + random.randint(1, max_dist)) % n
-        element = solution.pop(pos1)
-        solution.insert(pos2, element)
-    return solution
+    new_solution = solution[:]
+    for _ in range(perturbation_degree):
+        pos1, pos2 = random.sample(range(len(new_solution)), 2)
+        element = new_solution[pos1]
+        new_solution = new_solution[:pos1] + new_solution[pos1+1:]
+        new_solution.insert(pos2, element)
+    return new_solution
+
+# simple vertion
+def two_opt_simple(solution):
+    pos1, pos2 = sorted(random.sample(range(len(solution)), 2))
+    new_solution = solution[:pos1] + solution[pos1:pos2+1][::-1] + solution[pos2+1:]
+    return new_solution
+
+def two_swap_simple(solution):
+    pos1, pos2 = random.sample(range(len(solution)), 2)
+    new_solution = solution[:]
+    new_solution[pos1], new_solution[pos2] = new_solution[pos2], new_solution[pos1]
+    return new_solution
+
+def insertion_simple(solution):
+    pos1, pos2 = random.sample(range(len(solution)), 2)
+    element = solution[pos1]
+    new_solution = solution[:pos1] + solution[pos1+1:]
+    new_solution.insert(pos2, element)
+    return new_solution

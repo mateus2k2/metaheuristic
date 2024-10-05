@@ -4,7 +4,35 @@ import analysis as analysis
 import evaluate as evaluate
 import random
 
+# def local_search_vnd(data, initial_solution, neighborhood_func, max_iterations=1000, max_iterations_without_improvement=100):
+#     current_solution = initial_solution
+#     current_value = evaluate.evaluateList(data, current_solution)
 
+#     iterations_without_improvement = 0
+
+#     for iteration in range(max_iterations):
+#         if iterations_without_improvement >= max_iterations_without_improvement:
+#             break
+
+#         neighbors = neighborhood_func(current_solution)
+
+#         best_neighbor = None
+#         best_value = float('inf')
+
+#         for neighbor in neighbors:
+#             value = evaluate.evaluateList(data, neighbor)
+#             if value < best_value:
+#                 best_value = value
+#                 best_neighbor = neighbor
+                
+#         if best_value < current_value:
+#             current_solution = best_neighbor
+#             current_value = best_value
+#             iterations_without_improvement = 0
+#         else:
+#             iterations_without_improvement += 1
+
+#     return current_solution, current_value
 
 def local_search_best_fit(data, initial_solution, neighborhood_func, max_iterations=1000):
     current_solution = initial_solution

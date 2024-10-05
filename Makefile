@@ -54,4 +54,4 @@ VND:
 	clear && cd src && python3 main.py VND --input data/inputs/sm1.txt --initial constructive --max_iterations 10000 --iterations_without_improvement 10 --p_max 5 --graph
 	
 analysisVND:
-	clear && cd src && python3 main.py analysis --input data/outputs/results_TESTE.json data/outputs/results_construtivas.json --output data/outputs/TESTE.png --type rpd --version avr
+	clear && cd src && python3 main.py analysis --input data/outputs/results_VND.json data/outputs/results_MFFD.json data/outputs/results_localSearch5.json --output data/outputs/TESTE.png --type rpd --version avr
