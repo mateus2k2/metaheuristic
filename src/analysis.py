@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import statistics
 from tabulate import tabulate
 
-def dadosArtigo(avrRPDValues, avrTimeValues):
+def dadosArtigo(avrRPDValues, avrTimeValues, stdRPDValues, stdTimeValues):
     avrRPDValues["LSFF"] = [
         29.45,
         35.9,
@@ -139,6 +139,17 @@ def dadosArtigo(avrRPDValues, avrTimeValues):
         1800.15,
         1800.30
     ]
+    
+    stdRPDValues["LSFF"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    stdRPDValues["LSBF"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    stdRPDValues["MIP"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    stdRPDValues["MILP"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    
+    stdTimeValues["LSFF"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    stdTimeValues["LSBF"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    stdTimeValues["MIP"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    stdTimeValues["MILP"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    
     return avrRPDValues, avrTimeValues
 
 def createPeriodsFromList(data, solution):
@@ -201,7 +212,7 @@ def analysis(inputs, output, type='rpd', version='avr'):
     # ----------------------------------------
     # Dados do artigo
     # ----------------------------------------
-    avrRPDValues, avrTimeValues = dadosArtigo(avrRPDValues, avrTimeValues)
+    avrRPDValues, avrTimeValues = dadosArtigo(avrRPDValues, avrTimeValues, stdRPDValues, stdTimeValues)
 
     plt.figure(figsize=(10, 6))
 

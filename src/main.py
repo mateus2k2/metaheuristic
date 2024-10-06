@@ -1,10 +1,6 @@
 import json
 import statistics
 import time
-import orjson
-# import math
-# from scipy import stats
-# import numpy as np
 
 import analysis as analysis
 import options as options
@@ -27,9 +23,9 @@ def run(input, output, prints=1):
     batch = open(input, 'r')
     batch = json.load(batch)
 
-    for i, item in enumerate(batch["queue"]):
+    for k, item in enumerate(batch["queue"]):
         print()
-        if prints > 0: print(f"Method: {item['id']} | Num: {i+1}/{len(batch['queue'])}")
+        if prints > 0: print(f"Method: {item['id']} | Num: {k+1}/{len(batch['queue'])}")
         
         for l, className in enumerate(item["fileSizeClass"]):
             itemResult = {}
@@ -42,7 +38,7 @@ def run(input, output, prints=1):
                 
                 if prints > 0: print(f"\tFile: {file} | Id: {item['id']} | Num: {i+1}/{item['maxFilesToRunPerClass']}")
 
-                for i in range(0, item["numOfTimesToRun"]):
+                for _ in range(0, item["numOfTimesToRun"]):
                     runTime, value, solution = 0, 0, []
 
                     start_time = time.perf_counter()
@@ -59,19 +55,15 @@ def run(input, output, prints=1):
                     fileResults.append({"value": value, "solution": solution, "time": end_time - start_time})
                 
 
-                # sum of processing times of data
                 lower_bound = sum(data["processingTimes"])
 
-                # Extract the best result solution
                 best_result = min(fileResults, key=lambda x: x["value"])
                 best_value = best_result["value"]
                 best_solution = best_result["solution"]
 
-                # Calculate the mean of the result values
                 values = [result["value"] for result in fileResults]
                 mean_value = statistics.mean(values)
 
-                # Calculate the mean of the result times
                 times = [result["time"] for result in fileResults]
                 mean_time = statistics.mean(times)
 
@@ -97,7 +89,6 @@ def run(input, output, prints=1):
 
     resultsFile = open(output, 'w')
     json.dump(results, resultsFile, indent=1, separators=(',', ':'))
-    # resultsFile.write(orjson.dumps(data))
 
 # ------------------------------------------------------------------------------------------------------------------------
 # Comandos

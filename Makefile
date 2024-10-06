@@ -51,7 +51,10 @@ runBatchVND:
 	clear && cd src && python3 main.py run --input data/batch_VND.json --output data/outputs/results_VND.json --prints 1 && cd ..
 
 VND:
-	clear && cd src && python3 main.py VND --input data/inputs/sm1.txt --initial constructive --max_iterations 10000 --iterations_without_improvement 10 --p_max 5 --graph
+	clear && cd src && python3 main.py VND --input data/inputs/sm80.txt --initial constructive --max_iterations 100000 --iterations_without_improvement 5 --p_max 5 --graph
 	
 analysisVND:
-	clear && cd src && python3 main.py analysis --input data/outputs/results_VND.json data/outputs/results_MFFD.json data/outputs/results_localSearch5.json --output data/outputs/TESTE.png --type rpd --version avr
+	# clear && cd src && python3 main.py analysis --input data/outputs/results_VND.json data/outputs/results_MFFD.json data/outputs/results_localSearch5.json --output data/outputs/VND_rdp_avr.png --type rpd --version avr
+	clear && cd src && python3 main.py analysis --input data/outputs/results_VND.json data/outputs/results_MFFD.json data/outputs/results_localSearch5.json --output data/outputs/VND_time_avr.png --type time --version avr
+	# clear && cd src && python3 main.py analysis --input data/outputs/results_VND.json data/outputs/results_MFFD.json data/outputs/results_localSearch5.json --output data/outputs/VND_time_std.png --type time --version std
+	# clear && cd src && python3 main.py analysis --input data/outputs/results_VND.json data/outputs/results_MFFD.json data/outputs/results_localSearch5.json --output data/outputs/VND_rdp_std.png --type rpd --version std
